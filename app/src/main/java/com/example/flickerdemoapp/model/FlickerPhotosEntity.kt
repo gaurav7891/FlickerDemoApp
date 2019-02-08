@@ -1,4 +1,4 @@
-package com.example.flickerdemoapp.module
+package com.example.flickerdemoapp.model
 
 /**
  * Represents response of the api call

@@ -1,6 +1,6 @@
 package com.example.flickerdemoapp.networking
 
-import com.example.flickerdemoapp.module.FlickerPhotosEntity
+import com.example.flickerdemoapp.model.FlickerPhotosEntity
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query

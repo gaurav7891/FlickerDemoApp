@@ -1,6 +1,6 @@
 package com.example.flickerdemoapp.networking
 
-import com.example.flickerdemoapp.module.FlickerPhotosEntity
+import com.example.flickerdemoapp.model.FlickerPhotosEntity
 import io.reactivex.Single
 
 class NetworkServiceImpl(private val mNetworkService: NetworkService) : NetworkService {
