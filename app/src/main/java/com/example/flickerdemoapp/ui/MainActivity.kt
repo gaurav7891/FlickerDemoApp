@@ -6,19 +6,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.provider.Contacts
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.StaggeredGridLayoutManager
+import android.support.v7.widget.*
 import android.view.View
 import android.widget.Toast
 import com.example.flickerdemoapp.R
+import com.example.flickerdemoapp.base.BaseActivity
 import com.example.flickerdemoapp.networking.NetworkError
 import com.example.flickerdemoapp.ui.search.SearchActivity
 import com.example.flickerdemoapp.utils.Constants
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private var viewModel: MainViewModel? = null
     private var photoAdapter: PhotoAdapter? = null
@@ -30,7 +28,10 @@ class MainActivity : AppCompatActivity() {
         title = getString(R.string.txt_photo_title)
         setObservers()
         init()
+        setListener()
     }
+
+
 
     private fun setObservers() {
         viewModel?.errorMsg?.observe(this, Observer {
@@ -57,12 +58,15 @@ class MainActivity : AppCompatActivity() {
         viewModel?.getRecentPhotos(Constants.API_KEY)
         viewModel?.photoList?.observe(this, Observer {
             photoAdapter = PhotoAdapter(it,this@MainActivity)
-            val sgl = StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL)
-            sgl.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
+            val sgl = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
+            sgl.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
             recyclerView?.setHasFixedSize(true)
             recyclerView?.layoutManager = sgl
             recyclerView.adapter = photoAdapter
         })
+    }
+
+    private fun setListener() {
 
         fabSearch.setOnClickListener {
             startActivity(Intent(this,SearchActivity::class.java))

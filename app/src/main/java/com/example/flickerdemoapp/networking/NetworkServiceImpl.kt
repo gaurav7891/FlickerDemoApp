@@ -9,8 +9,8 @@ class NetworkServiceImpl(private val mNetworkService: NetworkService) : NetworkS
         return mNetworkService.getRecent(apiKey)
     }
 
-    override fun search(apiKey: String, text: String?): Single<FlickerPhotosEntity> {
-        return mNetworkService.search(apiKey, text)
+    override fun search(apiKey: String, text: String?, page: Int?): Single<FlickerPhotosEntity> {
+        return mNetworkService.search(apiKey, text,page)
     }
 
 }

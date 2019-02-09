@@ -24,6 +24,7 @@ class PhotoAdapter(private val mPhotoList: List<String>?, val context: Context) 
 
     override fun onBindViewHolder(holder: PhotoAdapter.PhotoViewHolder, pos: Int) {
         Glide.with(context)
+                .asBitmap()
                 .load(mPhotoList?.get(pos))
                 .apply(RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL))
                 .into(holder.imgPhoto)

@@ -47,13 +47,14 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
                 })
     }
 
-    fun search(apiKey: String, text: String) {
-        service.search(apiKey, text)
+    fun search(apiKey: String, text: String,page:Int) {
+        service.search(apiKey, text,page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : SingleObserver<FlickerPhotosEntity> {
                     override fun onSuccess(t: FlickerPhotosEntity) {
                         showProgress.value = false
+                        photoList.value = createImageLink(t.photos?.photo)
                     }
 
                     override fun onSubscribe(d: Disposable) {
