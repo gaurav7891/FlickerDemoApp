@@ -29,8 +29,6 @@ class MainActivity : BaseActivity() {
         setListener()
     }
 
-
-
     private fun setObservers() {
         viewModel?.errorMsg?.observe(this, Observer {
             onApiFailure(NetworkError(it).appErrorMessage)
@@ -56,9 +54,9 @@ class MainActivity : BaseActivity() {
         viewModel?.getRecentPhotos(Constants.API_KEY)
         viewModel?.photoList?.observe(this, Observer {
             photoAdapter = PhotoAdapter(it,this@MainActivity)
-            val sgl = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
+            val sgl = StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL)
             sgl.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
-            recyclerView?.setHasFixedSize(true)
+            recyclerView.setHasFixedSize(true)
             recyclerView?.layoutManager = sgl
             recyclerView.adapter = photoAdapter
         })
